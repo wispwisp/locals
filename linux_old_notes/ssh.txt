@@ -1,0 +1,19 @@
+-- USAGE EXAMPLES:
+(when: qemu ... -redir tcp:8001::22)
+ssh -p 8001 localhost
+
+scp -P 8001 ./notes.txt name@localhost:~/Desktop
+scp -P 8001 -rp ./dow/poco name@localhost:~/
+
+
+__ Form docs: __
+
+
+-- DIRCETORY:
+scp -rp sourcedirectory user@dest:/path
+-r means recursive
+-p preserves modification times, access times, and modes from the original file.
+	
+
+# ???
+mount -t nfs -o port=8002 localhost:/home/name /mnt/nfs

@@ -1,0 +1,5 @@
+grub2-mkconfig -o /boot/grub/grub.cfg
+
+
+>> first time:
+grub2-install /dev/sda

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for i in `seq 1 2`;
+do
+    for j in `seq 1 10`;
+    do
+	    mv film$i$j.mp4 cool_film$i$j.mp4
+    done
+done
+
+exit 0

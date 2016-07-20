@@ -1,0 +1,6 @@
+lsof
+lsof [file]
+lsof [process]
+
+
+список открытых файлой

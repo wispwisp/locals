@@ -1,0 +1,6 @@
+/etc/conf.d/xdm
+DISPAYMANAGER="kdm"
+/etc/init.d/xdm start
+
+rc-update add xdm default
+rc-update add consolekit deafult

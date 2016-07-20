@@ -1,0 +1,114 @@
+line u see not executed, it next line
+
+1)break main    or b
+2) run <args>   or set args
+3) step or next
+4) ... look below:
+
+
+//list - show code
+
+// print <var>   or p
+examples: print i, print mas[i]
+// можно присвоить
+p <var> = 1
+
+// next,step,continue
+next // next line
+step // will enter a funtion
+continue // when two breakpoints, no need for second 'run' command
+	    or c
+
+// show
+show args
+... enviroment, paths,
+
+// info
+info locals  # see all local vars
+... threads, program, 
+
+// set
+set srgs
+... enviroment
+
+
+
+s or step
+n or next
+RET -- previos command
+
+disable - ?
+
+
+// перенаправить ввод и/или вывод вашей программы
+run > выходной-файл
+
+
+**********************************************************************
+**********************************************************************
+**********************************************************************
+
+
+/////////// break <arg> ////////////
+////////////////////////////////////
+arg - func name, adress, line namber, ... etc.
+
+break main.c:14 // остановится на этой точке кода (файл обозначаем что бы
+gdb не запутался когда работаем с несколькими файлами)
+
+>> tbreak - Установить точку останова только до первой активизации
+
+
+>> break if <...>
+каждый раз, когда достигается точка останова,
+происходит вычисление выражения усл
+break foo if x>0
+
+>> rbreak <рег-выр>
+рег-выр - например все функции func* *-автоподстановка
+
+
+>> info break
+Номер точки останова
+Тип:
+    Точка останова, наблюдения или перехвата. 
+План:
+    Помечена ли точка останова для отключения или удаления после активации. 
+Включена или отключена:
+    Включенные точки останова помечаются как `y'. `n' отмечает отключенные точки. 
+Адрес:
+    Адрес памяти, где расположена точка останова в вашей программе. 
+Где:
+    Файл и номер строки, где расположена точка останова в исходном файле. 
+
+
+>> commands ... end
+commands [номер]
+... список-команд ...
+end
+
+пример:
+break foo if x>0
+commands
+silent                 // чтобы не было вывода
+printf "x is %d\n",x   // вывести нужное нам
+cont                   // continue
+end
+
+
+
+/////// catch <arg> //////
+
+arg - throw, catch, exec, fork, load<lib>, unliad<lib>, ...
+
+>> tcatch - до первой активации
+
+>>> clear<arg>
+>>> disable<> 
+>>> enable<>
+
+
+-tui  # Создаст окно где будет код
+
+# в самом gdb если написать - создаст еще окно где будет асемблерный код
+layout split

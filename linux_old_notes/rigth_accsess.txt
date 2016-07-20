@@ -1,0 +1,19 @@
+Default for process mask of acces rights
+
+-------    dir   file
+
+default:   0777   0666
+
+umask:     0002   0002
+----------------------
+minus:     0774   0664
+
+SUI,GUI,STICKY
+           1774   1664  SUI
+           2774   2664  SGI
+           1774   1664  Stiky
+
+4 - SUI
+2 - SGI
+1 - Stiky // ДЛЯ КАТАЛОГОВ:редактировать
+             файл может только владелец

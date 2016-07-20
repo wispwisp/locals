@@ -1,0 +1,14 @@
+toggle-truncate-lines ;; line brakes
+
+(kbd "C-<F9>") ;; Перевести строчку во внутренне клавишное представление
+(global-set-key (kbd "C-<F9>") 'my-foo)
+
+Ch + k	     ;; Что делает клавиша
+Ch + f	     ;; Что делает функция
+Ch + v	     ;; Что делает переменная
+Ch + a	     ;; Поиск по паттерну
+
+Ch + C       ;; Посмотреть текущие настройки кодировок
+
+
+ctrl-x + ctrl-o   delete all surrounding redundunt empty lines

@@ -1,0 +1,24 @@
+eselect kernel list
+eselect kernel set [n]
+
+zcat /proc/config.gz > /usr/src/linux/.config
+make menuconfig // or make oldconfig
+make && make modules_install
+
+mount /dev/sda1 /boot/
+cp /usr/src/linux/arch/x86/boot/bzImage /boot/kernel-3.NN.NN-gentoo
+grub2-mkconfig -o /boot/grub/grub.cfg
+
+rm -r /usr/src/linux-PREVIOS-KERNEL-CATALOGUE
+rm -r /lib/modules/3-NN-NN-PRE-PREVIOS-MODULE-CATALOUGE
+
+rm /boot/kernel-3.X.Y ( PRE-PREVIOS-KERNEL-!!!!! )
+rm /boot/System.map-3.X.Y
+rm /boot/config-3.X.Y
+
+/***/
+
+make oldconfig - читает конфигурацию из .conf и предлагает
+ответить на новые опции.
+
+Так что не забыть zcat /proc/config.gz > ./.config

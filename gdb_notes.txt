@@ -1,0 +1,24 @@
+ctrl+x, a
+ctrl l --- to make screen normal if it gonna baad 
+ctrl+x, 2
+ctrl+x, 1
+
+python inside:
+python
+import os
+print(os.getpid())
+...
+...
+end
+
+python print(gdb.breakpoints())
+python print(gdb.breakpoints()[0])
+python print(gdb.breakpoints()[0].location)
+
+python gdb.Breakpoint('7') # line 7
+
+
+
+core:
+
+gdb -c <core_file_name>

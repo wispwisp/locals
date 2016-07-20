@@ -1,0 +1,25 @@
+# mount -t proc proc /mnt/gentoo/proc
+# mount --rbind /sys /mnt/gentoo/sys
+# mount --rbind /dev /mnt/gentoo/dev
+# chroot /mnt/gentoo /bin/bash
+# source /etc/profile
+# export PS1="(chroot) $PS1"
+
+# exit
+cdimage ~# cd
+cdimage ~# umount -l /mnt/gentoo/dev{/shm,/pts,}
+cdimage ~# umount -l /mnt/gentoo{/boot,/proc,}
+cdimage ~# reboot
+
+Исходные коды - /usr/portage/distfiles
+binary - /usr/portage/packages
+
+С quickpkg вы можете создавать архивы пакетов, уже установленных в
+системе. Эти архивы можно использовать в качестве двоичных
+пакетов. Запуск quickpkg прост: только укажите имена пакетов, которые
+нужно заархивировать.  Например, чтобы поместить в архив curl, orage и
+procps: # quickpkg curl orage procps Двоичные пакеты будут сохранены в
+$PKGDIR (по умолчанию, в /usr/portage/packages/). Эти пакеты
+помещаются в $PKGDIR/<категория>.
+
+sys-power pm-utils

@@ -1,0 +1,5 @@
+grep -Ril "text-to-find-here" [dir_to_start]
+-i case insensitive
+-R - recursive
+-l only file name
+

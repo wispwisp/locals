@@ -1,0 +1,1 @@
+ddjvu -format=pdf name.{djvu,pdf}

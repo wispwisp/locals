@@ -1,0 +1,2 @@
+rc-update add [..] default
+rc-status -a

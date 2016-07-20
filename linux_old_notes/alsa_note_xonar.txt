@@ -1,0 +1,23 @@
+> изначально делал вывод через mplayer
+(iec958) - потому что якобы альса не дискритезирует если ей сказать
+что вывод через оптику
+в ./bashrc
+alias asus-xonar="mplayer -ao alsa:device=iec958=2 "
+
+> но потом попробовал пропсиать в ~/.asoundrc
+(и все заработало в том числе и bit perfect и браузер)
+pcm.!default {
+        type hw    
+        card 2 
+}
+ctl.!default {
+        type hw           
+        card 2
+}
+
+> опредилить под каким номером аудиократачка:
+aplay -l
+	-L - более летальный вывод
+
+> проверить работает ли после всего этого bit perfect:
+cat /proc/asound/card2/stream0

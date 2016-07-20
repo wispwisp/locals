@@ -1,0 +1,3 @@
+# put this in ./.bashrc
+
+alias battary="cat /sys/devices/LNXSYSTM:00/device:00/PNP0A08:00/device:02/PNP0C0A:00/power_supply/BAT0/capacity /sys/devices/LNXSYSTM:00/device:00/PNP0A08:00/device:02/PNP0C0A:00/power_supply/BAT0/status"

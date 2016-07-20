@@ -1,0 +1,38 @@
+Порядок обновления
+emerge --sync
+emerge -pvuDN --with-bdeps=y world
+emerge -pv --depclean
+revdep-rebuild
+
+иногда:
+emerge-webrsync
+
+опции:
+--ask
+--update --deep --newuse --with-bdeps=y world
+## кратко: emerge -pvuDN --with-bdeps=y world	(-pv:  --pretend --verbose)
+--unmerge			# Delete НО ОСТАЮТСЯ УСТАНОВЛЕННЫЕ С НИМ ПАКЕТЫ
+(Когда новые USE флаги)
+--depclean
+revdep-rebuild
+
+--search pdf
+--searchdesc pdf 	# Поиск по описанию
+
+--pretend [name] 	# Какие установит зависимости
+--fetchonly [name] 	# Загрузка исходного кода без его установки
+
+- vp [name]		# Проверить наличие USE-флага doc можно командой
+emerge -pve world	# посмотреть все установленные пакеты
+
+
+USE="-X" emerge -pv vim
+
+//// Доп программы: ////
+(gentoolkit)
+equery
+equery files [name]
+equery uses [name]		# опсиание use флагов [name]
+
+dispath-conf	# обновление файлов защищенных
+eclean-dist	#

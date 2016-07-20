@@ -1,0 +1,8 @@
+ln -s `pwd -P` ~/linkss/linux2txt
+
+
+ln -s [`comand`/file] [linkPlaceName]:
+ln -s `pwd -P`/section3.mp4 ~/section3
+
+
+ln -s `pwd -P` ~/linkName

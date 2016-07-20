@@ -1,0 +1,11 @@
+mplayer -dumpaudio -dumpfile sound.mp3 FROM.avi
+
+ffmpeg -i input.avi -vn output.mp3
+
+Или для wmv:
+ffmpeg -i input.wmv -vn -acodec copy output.wma
+
+
+преобразуем wma в mp3:
+mplayer -quiet -vo null -vc dummy -af volume=0,resample=44100:0:1 -ao pcm:waveheader:file=output.wav output.wma
+lame -V0 -h -b 192 --vbr-new output.wav output.mp3

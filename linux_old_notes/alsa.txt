@@ -1,0 +1,8 @@
+aplay -l
+aplay -L
+
+mplayer -ao help
+
+mplayer -ao alsa:device={NUM}={NUM}
+
+mplayer -ao alsa:device=hdmi=1

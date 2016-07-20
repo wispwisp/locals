@@ -1,0 +1,3 @@
+tar cf name.tar files/
+
+tar xf name.tar

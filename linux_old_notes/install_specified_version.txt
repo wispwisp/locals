@@ -1,0 +1,5 @@
+emerge -pv =ruby-1.8.6
+
+(???)
+надо написать в /etc/portage/package.mask
+>=dev-lang/ruby-1.8.7

@@ -1,0 +1,6 @@
+shift + f  -- setup options (search for example)
+
+# Monitor specific process:
+ps aux|grep <name>
+-see pid
+top -p<pid>

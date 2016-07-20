@@ -1,0 +1,41 @@
+/////chmode /////
+//// chmode [code] filename
+--x  -w-  -wr  r--  r-x  rw-  rwx  
+ 1    2    3    4    5    6    7
+
+
+///// chgrp /////
+///// chown /////
+
+
+одновременно меняем
+chown root:wheel /etc/passwd
+-R меняет рекурсивно все в директории
+
+Режим	Число
+
+rwx     7
+rw-     6
+r-x     5
+r--     4
+-wx     3
+-w-     2
+--x     1
+---     0
+
+$ umask
+
+/////////////////////////////////////
+suid	sgid	sticky	режим
+
+on	on	on	7
+on	on	off	6
+on	off	on	5
+on	off	off	4
+off	on	on	3
+off	on	off	2
+off	off	on	1
+off	off	off	0
+
+пример # chmod 1775 /home/groupfiles
+

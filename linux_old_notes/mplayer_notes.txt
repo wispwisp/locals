@@ -1,0 +1,41 @@
+###	SUBLTITLES	###
+-subcp koi8r 		# Кодировка субтитров
+	cp1251		# ...
+-subfont-text-scale 10	# Размер субтитров
+
+###	OTHER
+-ss 00:00:00		# Время с которого начать
+-shuffle		# рандомное воспроизведение
+
+###	КНОПКИ:	###
+# - перключение дорожен аудио
+j - переключение дороже субтитров
+[] - скорость
+90 - громкость
+o - время
+<> - след./пред. файл
+ZX - синронизация сбутитров
+
+###	More	###
+cp verdana.ttf /home/user/.mplayer/subfont.ttf
+
+~/.mplayer/config
+#subcp = cp1251		# шрифт по умолчанию
+#unicode = 1		
+#ass = 1		# Фишки шрифта буду работать (цвет форма и т.д.)
+#fontconfig=yes
+#font=Verdata		# Все что не закоментил хз что значит
+#font=Arial		# с какого то формуа конфиг
+#spuaa=4
+#sub-fuzziness=0
+
+###	Вывод на ЮСБ внешнюю карточку	###
+cat /proc/asound/cards				# Смотрим номер карточки
+mplayer -ao alsa:device=hw=1 [filename]		# hw=номер карточки
+mplayer -ao alsa:device=default=2		# лучше качество ?
+		:device=iec958=2		# BEST
+
+
+////// try ? ////
+mplayer -audiofile audio.ac3 -audio-demuxer 20 -rawaudio format=0x2000 
+Movie.avi

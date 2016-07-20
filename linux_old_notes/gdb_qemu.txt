@@ -1,0 +1,47 @@
+1. Запускаем виртуальную машину (для примера используется простая
+загрузка ОС с дискеты):
+qemu -fda ./boot.fdd -s -S -vnc none &
+-s -S - машина запустится в приостановленном режиме и врежиме отладки
+-vnc none означает, что машина запустится без активного терминала
+
+2. Теперь, запускаем сам отладчик gdb:
+$ gdb
+В отладчике gdb коннектимся к порту qemu:
+(Gdb) target remote localhost:1234
+>> Кстати этот порт виден в netstat:
+$ netstat –tlpn
+
+3.
+set arch i8086
+break *0x7c00
+continue
+
+
+
+
+## shortcut to copy
+
+1 qemu-system-x86_64 -hda disk.img -s -S
+// or:  qemu -fda ./boot.fdd -s -S
+
+2 gdb
+target remote localhost:1234
+set arch i8086
+break *0x7c00
+continue
+
+
+
+
+*****
+удаляем брэйкпоинт:
+(gdb) delete 6
+
+проверяем возвращаемое значение:
+(gdb) print /x $ax
+
+делаем шаг далее:
+(gdb) stepi
+
+прочитать значение одного из параметров функции:
+(gdb) x/1w $ss*16+0x12

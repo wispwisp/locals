@@ -1,0 +1,130 @@
+git co master
+git merge —no-ff dev		// сохранить в истории понятие ветки
+git branch -D dev
+git push origin :dev		// потрет ремот
+
+("Удалить бранч из репозитория на сервере: git push origin :branch-name")
+
+
+// СОЗДАНИЕ ВЕТКИ В УДАЛЕННОМ РЕПОЗИТОРИИ
+
+1) Запушим на remote нашу ветку
+git push origin MYBRANCH
+(ИЛИ: Запушить текущую ветку, не вводя целиком ее название: git push origin HEAD)
+
+1) синхо этой ветки
+git branch --set-upstream-to=origin/<branch> <curr_branch>
+ИЛИ:
+
+2) пушнуть и синкнуть
+git push --set-upstream origin HEAD
+
+2) На другом компе получить ветку после clone
+(Посмотрим remote ветки: git branch -r)
+git checkout <branch>
+(ИЛИ? git checkout -b some_branch origin/some_branch)
+(у саши "Начать работать с веткой some_branch (уже существующей)")
+checkout -b <name> origin/<name> == --track origin/<name> == checkout <name> (if exists)
+
+// ***
+
+
+// НАЧАЛО РАБОТЫ
+git pull --rebase origin master
+/* git rebase master */
+
+status -s
+fetch --all
+checkout -b <name> origin/<name> == --track origin/<name> == checkout <name> (if exists)
+
+// current branch to remote.
+-u, --set-upstream-to <name>
+
+
+
+// ЛОГ
+git log --graph --decorate --all
+git log -p -2
+--oneline
+
+show master@{yesterday}
+
+HEAD^ - parent of HEAD
+HEAD^2, HEAD~2,
+
+
+// ...
+remote show, rename, add
+ls-remote
+git remote -v // более подробная инфа по remote репозиторию
+git branch -r // remote ветки
+           -a // все ветки
+git branch --set-upstream-to=origin/<branch> <curr_branch>
+
+
+// ПОСМОТРЕТЬ ФАЙЛ ИЗ РАЗНЫХ БРАНЧЕЙ
+Пример - текущая и мастер для файла:
+  git diff HEAD master -- ./<path>/file.hpp
+
+
+// Изменения, сделанные в заданном коммите
+git show d8578edf8458ce06fbc5bb76a58c5ca4a58c5ca4
+
+
+// Удаление untracked files:
+git clean -f
+-d directorys
+-x for .gitignore file also
+-n dry run
+
+
+// Откатить изменнеия к тем что в репозитории ()
+git reset --hard origin/<BRANCH_NAME>
+
+
+// CONFIGS:
+git config --global core.editor
+git config --global alias.co checkout
+git config --global pull.rebase true
+
+
+// Edit created commit
+--amend
+
+diff --check // check for whitespaces errors
+
+rebase -i HEAD~3
+
+
+// Патчи
+git diff <=> git apply
+apply --check
+
+format-patch
+.. - for range
+log origin/master..HEAD - all non master commits
+
+
+
+// stash
+stash == stash save
+list
+apply [stash@{2}] - just appplay
+drop [stash@{2}] - remove
+pop - apllay and remove
+
+-u, --include-untracked
+
+branch - branch from stash
+
+
+
+// grep
+-n, --conut
+-p - in what function
+
+when word been introduced first time
+log -S <...> [--oneline[
+    -G - for a regexp
+
+log -L :func:file.c - history of function from it creation

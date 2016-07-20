@@ -1,0 +1,14 @@
+>show info only
+id3ed -i
+>check is okay:
+id3ed -i * | sed -n /^album/p
+
+>edit albom
+id3ed -A
+
+>fast inline edit (for _A_lbom):
+id3ed -Aq *
+
+> for all file with no printing
+id3ed -a [album_name] -q *
+( -qq for silent)

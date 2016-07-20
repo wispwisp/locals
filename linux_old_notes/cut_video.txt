@@ -1,0 +1,3 @@
+ffmpeg -i input.wmv -ss 00:00:00 -c copy -t 00:00:10 output.wmv
+
+С начала, на протяжении 10 секунд

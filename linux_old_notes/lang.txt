@@ -1,0 +1,14 @@
+eselect locale set en_US.utf8 
+
+На заметку: Список наличных можно посмотреть в /usr/share/keymaps/i386/qwerty.
+(ruwin_ct_sh-UTF-8 кодировка UTF-8, переключение Ctrl-Shift)
+
+Раскладка клавиатуры настраиваются в файле /etc/conf.d/keymaps к примеру: 
+KEYMAP="-u ruwin_ct_sh-UTF-8"
+
+Ставим шрифты terminus:
+emerge -av terminus-font
+Файл: /etc/conf.d/consolefont
+CONSOLEFONT="ter-v14n"
+
+/etc/init.d/consolefont restart
