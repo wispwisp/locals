@@ -95,6 +95,10 @@ diff --check // check for whitespaces errors
 
 rebase -i HEAD~3
 
+// "another squash"
+reset --soft HEAD~2
+
+
 
 // Патчи
 git diff <=> git apply
@@ -128,3 +132,9 @@ log -S <...> [--oneline[
     -G - for a regexp
 
 log -L :func:file.c - history of function from it creation
+
+
+
+// delete file from whole history
+filter-branch --tree-filter 'rm -f <huge_binary> HEAD'
+--all - for all branches

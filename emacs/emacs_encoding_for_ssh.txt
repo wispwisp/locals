@@ -1,0 +1,15 @@
+;; For emacs work in SHH:
+
+;; Coding system for keyboard input:
+(set-keyboard-coding-system 'utf-8-unix)
+
+;; Coding system for terminal output:
+(set-terminal-coding-system 'utf-8-unix)
+
+;;
+(prefer-coding-system 'utf-8-unix)
+;;(setq coding-system-for-read 'utf-8-unix)
+;;(setq coding-system-for-write 'utf-8-unix)
+
+;; Defaults for subprocess I/O:
+;;(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
