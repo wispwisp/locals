@@ -136,5 +136,8 @@ log -L :func:file.c - history of function from it creation
 
 
 // delete file from whole history
-filter-branch --tree-filter 'rm -f <huge_binary> HEAD'
+filter-branch --tree-filter 'rm -f <huge_binary>' HEAD
 --all - for all branches
+
+
+
