@@ -83,10 +83,10 @@ git reset --hard origin/<BRANCH_NAME>
 
 
 // CONFIGS:
-git config --global core.editor
+git config --global core.editor emacs
 git config --global alias.co checkout
 git config --global pull.rebase true
-
+core.autocrlf
 
 // Edit created commit
 --amend
@@ -139,5 +139,28 @@ log -L :func:file.c - history of function from it creation
 filter-branch --tree-filter 'rm -f <huge_binary>' HEAD
 --all - for all branches
 
+
+
+* rerere - save merge scenarios
+
+* bisect - sorch for 'bad' commit
+
+
+
+// Attribute files
+.gitattributes
+
+exmple:
+*.bin binary
+*.docx diff=word
+
+
+
+// Lost commits
+* count-objects
+* git reflog
+* git fsck --full
+
+-> git branch <name> <shasumm>
 
 

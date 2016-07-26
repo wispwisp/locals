@@ -1,0 +1,33 @@
+docker ps (-a) (-l 'last')
+docker logs <container> (-f 'tail -f')
+
+docker run <container>
+docker stop <container>
+
+docker top <container>
+docker inspect <container>
+docker start <container>
+docker rm <container>
+
+docker images
+docker rmi <image>
+docker pull <container>
+docker search <container>
+
+docker build .
+docker build -t 
+docker tag XXXXXX <user/name:tag>
+
+
+sudo docker run -d -p 8080:5000 training/webapp python app.py
+docker run -d -p <to>:<what> <container> <app> <...args>
+-d - demon
+-p ports explisit
+
+
+
+docker run -i -t ubuntu /bin/bash
+-i - interactiv
+-t - make tty
+
+docker run -t -i ubuntu:14.04 /bin/bash
