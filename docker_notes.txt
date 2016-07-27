@@ -12,11 +12,11 @@ docker rm <container>
 
 docker images
 docker rmi <image>
-docker pull <container>
-docker search <container>
+docker pull <image>
+docker search <...>
 
 docker build .
-docker build -t 
+docker build -t <name>
 docker tag XXXXXX <user/name:tag>
 
 
@@ -24,14 +24,20 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <co
 
 
 sudo docker run -d -p 8080:5000 training/webapp python app.py
-docker run -d -p <to>:<what> <container> <app> <...args>
--d - demon
--p ports explisit
+docker run -d -p <local>:<container> <image> <app> <...args>
+-d - run background
+-p [local_port]:[container_port] - 'forward the local port to the container port'
 
 
 docker run -i -t ubuntu /bin/bash
 -i - interactive
 -t - make tty
+
+
+# some more 'run' options
+--rm - 'Destroy a container once its exits'
+--name
+
 
 nm-tool | grep DNS
 

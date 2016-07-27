@@ -35,6 +35,8 @@ mplayer -ao alsa:device=hw=1 [filename]		# hw=номер карточки
 mplayer -ao alsa:device=default=2		# лучше качество ?
 		:device=iec958=2		# BEST
 
+// Speed
+mplayer -speed 1.5 -af scaletempo *.mp4
 
 ////// try ? ////
 mplayer -audiofile audio.ac3 -audio-demuxer 20 -rawaudio format=0x2000 

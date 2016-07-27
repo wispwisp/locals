@@ -164,3 +164,6 @@ exmple:
 -> git branch <name> <shasumm>
 
 
+// bash auto complete
+- from github: "contrib/completion/git-completion.bash"
+- in .bashrc: ". ~/git-completion.bash"
