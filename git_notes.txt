@@ -65,7 +65,8 @@ git branch --set-upstream-to=origin/<branch> <curr_branch>
 // ПОСМОТРЕТЬ ФАЙЛ ИЗ РАЗНЫХ БРАНЧЕЙ
 Пример - текущая и мастер для файла:
   git diff HEAD master -- ./<path>/file.hpp
-
+or:
+  git diff master HEAD -- ./<path>/file.hpp ./<path>/file2.hpp
 
 // Изменения, сделанные в заданном коммите
 git show d8578edf8458ce06fbc5bb76a58c5ca4a58c5ca4

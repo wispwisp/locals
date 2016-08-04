@@ -12,3 +12,6 @@ Ch + C       ;; Посмотреть текущие настройки коди�
 
 
 ctrl-x + ctrl-o   delete all surrounding redundunt empty lines
+
+ctrl-x + ctrl-l   lowercase
+ctrl-x + ctrl-u   uppercase
