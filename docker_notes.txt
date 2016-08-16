@@ -46,3 +46,11 @@ sudo docker run -t -i --dns 10.0.2.3 ubuntu /bin/bash
 echo $(nm-tool | grep DNS) | sed "s/DNS: //"
 emacs /etc/default/docker
 service docker restart
+
+
+# with gui
+docker run --rm -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix <container> <command>
+
+# could be necessary to add:
+# give docker the rights to access the X-Server
+xhost +local:docker
