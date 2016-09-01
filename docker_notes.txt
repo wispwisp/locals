@@ -28,6 +28,7 @@ docker run -d -p <local>:<container> <image> <app> <...args>
 -d - run background
 -p [local_port]:[container_port] - 'forward the local port to the container port'
 
+-P - map all necessary ports
 
 docker run -i -t ubuntu /bin/bash
 -i - interactive

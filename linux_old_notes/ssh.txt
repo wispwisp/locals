@@ -17,3 +17,11 @@ scp -rp sourcedirectory user@dest:/path
 
 # ???
 mount -t nfs -o port=8002 localhost:/home/name /mnt/nfs
+
+
+# ???
+tunneling:
+  sudo ssh -f -N ...@... -L *:<port>:<ip>:port
+example:
+  sudo ssh -f -N ...@... -L *:5555:10.10.10.10:6666
+  (?) - from *:5555 port to 10.10.10.10:6666 port
