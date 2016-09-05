@@ -78,6 +78,9 @@ git clean -f
 -x for .gitignore file also
 -n dry run
 
+// remove all untracked files (-x remove all ignored)
+git clean -fdx
+
 
 // Откатить изменнеия к тем что в репозитории ()
 git reset --hard origin/<BRANCH_NAME>
@@ -98,10 +101,7 @@ rebase -i HEAD~3
 
 // "another squash"
 reset --soft HEAD~2
-
-
-// remove all untracked files (-x remove all ignored)
-git clean -fdx
+(--soft default for reset (?))
 
 
 // Патчи
@@ -171,3 +171,9 @@ exmple:
 // bash auto complete
 - from github: "contrib/completion/git-completion.bash"
 - in .bashrc: ". ~/git-completion.bash"
+
+
+// rename
+git branch -m old_branch new_branch
+git push origin :old_branch
+git push --set-upstream origin new_branch
