@@ -15,3 +15,6 @@ ctrl-x + ctrl-o   delete all surrounding redundunt empty lines
 
 ctrl-x + ctrl-l   lowercase
 ctrl-x + ctrl-u   uppercase
+
+C-q insert the next character as a raw character
+C-q <press tab>
