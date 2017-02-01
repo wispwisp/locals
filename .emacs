@@ -38,8 +38,13 @@
 
 ;; tabs:
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default c-basic-offset 4)
+
+;; tabs for work ...
+(defun my-cpp-tabs-hook ()
+  (setq indent-tabs-mode t)
+  (setq-default tab-width 4)
+  (setq-default c-basic-offset 4))
+(add-hook 'c++-mode-hook 'my-cpp-tabs-hook)
 
 
 ;; yes/no -> y/n
@@ -98,3 +103,20 @@
 ;; yasnipet
 ;;(require 'yasnippet)
 ;;(yas-global-mode 1)
+
+
+;; jqery documantation
+;; press "alt-x jqery-doc" after function
+(require 'jquery-doc)
+(add-hook 'js2-mode-hook 'jquery-doc-setup)
+
+
+;; Dirent by 'a' - do not open new buffers
+(put 'dired-find-alternate-file 'disabled nil)
+
+
+;; My keys
+(global-set-key (kbd "C-c c k") 'comment-region)
+(global-set-key (kbd "C-c c u") 'uncomment-region)
+(global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
+(global-set-key (kbd "C-c c TAB") 'clang-format-region)
