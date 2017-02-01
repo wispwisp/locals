@@ -39,15 +39,9 @@ docker run -i -t ubuntu /bin/bash
 --rm - 'Destroy a container once its exits'
 --name
 
-
-nm-tool | grep DNS
-
+# dns in virtual machine
 sudo docker run -t -i --dns 10.0.2.3 ubuntu /bin/bash
-
-echo $(nm-tool | grep DNS) | sed "s/DNS: //"
-emacs /etc/default/docker
-service docker restart
-
+dockerd ... --dns 10.0.2.3 ...
 
 # with gui
 docker run --rm -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix <container> <command>
