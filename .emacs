@@ -3,6 +3,16 @@
 (package-initialize)
 
 
+;; No startup screen
+(setq inhibit-startup-screen t)
+
+
+;; no new line at the end of a file
+;; (setq require-final-newline nil)
+;; (setq mode-require-final-newline nil)
+
+
+;; saving
 (setq make-backup-files nil)
 ;;(setq auto-save-list-file-name nil)
 ;;(setq auto-save-default nil)
@@ -30,7 +40,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; file opening variants inline
+;; file opening variants inline
 ;;(require 'ido)
 ;;(ido-mode t)
 ;;(setq ido-enable-flex-matching t)
@@ -38,13 +48,7 @@
 
 ;; tabs:
 (setq-default indent-tabs-mode nil)
-
-;; tabs for work ...
-(defun my-cpp-tabs-hook ()
-  (setq indent-tabs-mode t)
-  (setq-default tab-width 4)
-  (setq-default c-basic-offset 4))
-(add-hook 'c++-mode-hook 'my-cpp-tabs-hook)
+(setq-default tab-width 4)
 
 
 ;; yes/no -> y/n
@@ -54,10 +58,6 @@
 ;; Display line and column numbers
 (setq line-number-mode    t)
 (setq column-number-mode  t)
-
-
-;; Line-wrapping
-(set-default 'fill-column 80)
 
 
 ;; light-symbol-mode
@@ -75,7 +75,7 @@
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers)
   (add-to-list 'achead:include-directories
-	       '"/usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3/include/g++-v4"))
+               '"/usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3/include/g++-v4"))
 
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
@@ -120,3 +120,19 @@
 (global-set-key (kbd "C-c c u") 'uncomment-region)
 (global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
+
+
+
+
+;; work...
+(defun my-cpp-tabs-hook ()
+  (setq indent-tabs-mode t)
+  (setq tab-width 4)
+  (setq c-basic-offset 4))
+(add-hook 'c++-mode-hook 'my-cpp-tabs-hook)
+
+
+(defun my-purescript-hook ()
+  (progn (turn-on-purescript-indent)
+         (auto-comlete-mode t)))
+(add-hook 'purescript-mode-hook 'my-purescript-hook)
