@@ -136,3 +136,7 @@
   (progn (turn-on-purescript-indent)
          (auto-comlete-mode t)))
 (add-hook 'purescript-mode-hook 'my-purescript-hook)
+
+;; add "self" like "this" as keyword
+(font-lock-add-keywords 'javascript-mode
+                        '(("\\<self\\>" 0 'font-lock-constant-face prepend)))

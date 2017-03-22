@@ -1,3 +1,5 @@
+#С начала, на протяжении 10 секунд
 ffmpeg -i input.wmv -ss 00:00:00 -c copy -t 00:00:10 output.wmv
 
-С начала, на протяжении 10 секунд
+# or:
+ffmpeg -i movie.mp4 -ss 00:00:03 -t 00:00:08 -async 1 cut.mp4

@@ -1,4 +1,0 @@
-MTA: postfix
-MDA: dovecot
-
-send mail: mail

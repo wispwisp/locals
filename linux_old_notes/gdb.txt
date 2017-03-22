@@ -1,47 +1,84 @@
-line u see not executed, it next line
-
-1)break main    or b
+1) break main    or b
 2) run <args>   or set args
-3) step or next
-4) ... look below:
+3) [s]tep or [n]ext or [c]ontinue
+
+# перенаправить ввод и/или вывод
+run > выходной-файл
 
 
-//list - show code
+# list
+show code around current line
 
-// print <var>   or p
-examples: print i, print mas[i]
-// можно присвоить
+# print <var>
 p <var> = 1
 
-// next,step,continue
-next // next line
-step // will enter a funtion
-continue // when two breakpoints, no need for second 'run' command
-	    or c
-
-// show
+# show
 show args
 ... enviroment, paths,
 
-// info
+# info
 info locals  # see all local vars
 ... threads, program, 
 
-// set
-set srgs
-... enviroment
+#
+info threads
+thread N
+
+# stack
+bt
+frame n (f n )
+
+# u until (until next line; loop)
+# ret 0, 1, etc # return from current func
+# j <line>
+
+# p *x@12 # 12` element in array x
 
 
+# set
+set args
 
-s or step
-n or next
-RET -- previos command
+set $vd = my_model->dataset->vector->data
+p *$vd@10
+  
+set $ptr=&x[3]
+p *$ptr = 8
+p *($ptr++) #print the pointee, and step forward one
 
-disable - ?
+
+# core:
+gdb -c <core_file_name>
 
 
-// перенаправить ввод и/или вывод вашей программы
-run > выходной-файл
+# breakpint from code:
+include <csignal>
+std::raise(SIGINT); // or SIGABRT
+# or:
+__asm__("int $3");
+
+
+########
+# Screen 
+ctrl+x, a
+ctrl l --- to make screen normal if it gonna baad 
+ctrl+x, 2
+ctrl+x, 1
+
+
+###################
+# python inside gdb:
+python
+import os
+print(os.getpid())
+...
+...
+end
+
+python print(gdb.breakpoints())
+python print(gdb.breakpoints()[0])
+python print(gdb.breakpoints()[0].location)
+
+python gdb.Breakpoint('7') # line 7
 
 
 **********************************************************************

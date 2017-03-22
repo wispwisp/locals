@@ -1,4 +1,0 @@
-ls -l | awk '{ print $1. $5}'  # вывести 1 и пятый столбец
-echo првоерка | awk '{print toupper($1)}' 
-
-
