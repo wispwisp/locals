@@ -80,6 +80,10 @@ python print(gdb.breakpoints()[0].location)
 
 python gdb.Breakpoint('7') # line 7
 
+## functions
+define gpioa_moder
+    print /t *(uint32_t*)0x48000000
+end
 
 **********************************************************************
 **********************************************************************
