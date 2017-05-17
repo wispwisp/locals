@@ -40,8 +40,12 @@ docker run -i -t ubuntu /bin/bash
 --name
 
 # dns in virtual machine
-sudo docker run -t -i --dns 10.0.2.3 ubuntu /bin/bash
+sudo docker run -t -i --rm --dns 10.0.2.3 ubuntu /bin/bash
 dockerd ... --dns 10.0.2.3 ...
+
+"/etc/default/docker"
+DOCKER_OPTS="-dns 10.0.2.3"
+service docker restart
 
 # with gui
 docker run --rm -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix <container> <command>
