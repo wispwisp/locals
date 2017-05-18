@@ -24,12 +24,22 @@
 (menu-bar-mode -1)
 
 
-;; ----- Not ncurses:
-;;(scroll-bar-mode -1)
-;;(tool-bar-mode -1)
-;;(global-hl-line-mode 1) ; line hightlight
-;;(set-default-font "Monaco 32")
-;;(setq frame-title-format "emacs - %f")
+;; tabs
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+
+;; yes/no -> y/n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+
+;; Dirent by 'a' - do not open new buffers
+(put 'dired-find-alternate-file 'disabled nil)
+
+
+;; Display line and column numbers
+(setq line-number-mode    t)
+(setq column-number-mode  t)
 
 
 ;;;;;;;;;;;;;;;
@@ -44,24 +54,6 @@
 ;;(require 'ido)
 ;;(ido-mode t)
 ;;(setq ido-enable-flex-matching t)
-
-
-;; tabs:
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
-
-;; yes/no -> y/n
-(fset 'yes-or-no-p 'y-or-n-p)
-
-
-;; Display line and column numbers
-(setq line-number-mode    t)
-(setq column-number-mode  t)
-
-
-;; light-symbol-mode
-;;(require 'light-symbol-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -111,10 +103,6 @@
 (add-hook 'js2-mode-hook 'jquery-doc-setup)
 
 
-;; Dirent by 'a' - do not open new buffers
-(put 'dired-find-alternate-file 'disabled nil)
-
-
 ;; My keys
 (global-set-key (kbd "C-c c k") 'comment-region)
 (global-set-key (kbd "C-c c u") 'uncomment-region)
@@ -122,6 +110,19 @@
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
 
 
+;; highlight
+(require 'highlight-symbol)
+(highlight-symbol-mode t)
+(global-set-key (kbd "C-c c s r") 'highlight-symbol-query-replace)
+(global-set-key (kbd "C-c c s l") 'highlight-symbol-occur)
+(global-set-key (kbd "C-c c s n") 'highlight-symbol-next)
+(global-set-key (kbd "C-c c s p") 'highlight-symbol-prev)
+(setq highlight-symbol-idle-delay 0.5)
+
+
+;; regex search
+(global-set-key (kbd "M-s") 'search-forward-regexp)
+(global-set-key (kbd "M-r") 'search-backward-regexp)
 
 
 ;; work...
@@ -137,6 +138,18 @@
          (auto-comlete-mode t)))
 (add-hook 'purescript-mode-hook 'my-purescript-hook)
 
-;; add "self" like "this" as keyword
-(font-lock-add-keywords 'javascript-mode
-                        '(("\\<self\\>" 0 'font-lock-constant-face prepend)))
+
+(defun my-breakpoint ()
+  (interactive)
+  (insert "asm(\"int $3\");"))
+(global-set-key (kbd "C-c c b") 'my-breakpoint)
+
+
+;; "C-o" to get all occurrences in file
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda ()
+    (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string
+               (regexp-quote isearch-string))))))
+
