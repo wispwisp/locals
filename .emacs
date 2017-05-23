@@ -68,7 +68,6 @@
   (add-to-list 'ac-sources 'ac-source-c-headers)
   (add-to-list 'achead:include-directories
                '"/usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3/include/g++-v4"))
-
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
@@ -108,6 +107,8 @@
 (global-set-key (kbd "C-c c u") 'uncomment-region)
 (global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
+;; (global-unset-key (kbd "<f12>"))
+;; (global-set-key (kbd "<f12>") ')
 
 
 ;; highlight
@@ -125,24 +126,17 @@
 (global-set-key (kbd "M-r") 'search-backward-regexp)
 
 
-;; work...
-(defun my-cpp-tabs-hook ()
-  (setq indent-tabs-mode t)
-  (setq tab-width 4)
-  (setq c-basic-offset 4))
-(add-hook 'c++-mode-hook 'my-cpp-tabs-hook)
-
-
 (defun my-purescript-hook ()
   (progn (turn-on-purescript-indent)
          (auto-comlete-mode t)))
 (add-hook 'purescript-mode-hook 'my-purescript-hook)
 
 
-(defun my-breakpoint ()
+;; c/c++ breakpoints in code.
+(defun my:breakpoint ()
   (interactive)
   (insert "asm(\"int $3\");"))
-(global-set-key (kbd "C-c c b") 'my-breakpoint)
+(global-set-key (kbd "C-c c b") 'my:breakpoint)
 
 
 ;; "C-o" to get all occurrences in file
@@ -153,3 +147,9 @@
       (occur (if isearch-regexp isearch-string
                (regexp-quote isearch-string))))))
 
+
+(defun my:insert-something ()
+  (interactive)
+  (insert "some text"))
+(global-unset-key (kbd "C-c c i"))
+(global-set-key (kbd "C-c c i") 'my:insert-something)
