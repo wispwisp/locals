@@ -102,13 +102,21 @@
 (add-hook 'js2-mode-hook 'jquery-doc-setup)
 
 
+;;;;;;;;;;
 ;; My keys
+;; (global-unset-key (kbd "<f12>"))
+;; (global-set-key (kbd "<f12>") ')
+
 (global-set-key (kbd "C-c c k") 'comment-region)
 (global-set-key (kbd "C-c c u") 'uncomment-region)
 (global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
-;; (global-unset-key (kbd "<f12>"))
-;; (global-set-key (kbd "<f12>") ')
+
+;; regex search
+(global-set-key (kbd "M-s") 'search-forward-regexp)
+(global-set-key (kbd "M-r") 'search-backward-regexp)
+
+(global-set-key (kbd "C-M-y") 'revert-buffer)
 
 
 ;; highlight
@@ -121,24 +129,41 @@
 (setq highlight-symbol-idle-delay 0.5)
 
 
-;; regex search
-(global-set-key (kbd "M-s") 'search-forward-regexp)
-(global-set-key (kbd "M-r") 'search-backward-regexp)
+;; activate whitespace-mode to view all whitespace characters
+(global-set-key (kbd "C-c c w") 'whitespace-mode)
 
 
-(defun my-purescript-hook ()
+;; todo: new line and clang-format
+;; automatically indent when press RET
+;; (global-set-key (kbd "RET") 'newline-and-indent)
+
+
+;; show redundant trailing whitespaces
+(add-hook 'prog-mode-hook (lambda ()
+							(interactive)
+							(setq show-trailing-whitespace 1)))
+
+
+;; folding
+(defun my:folding()
+  (add-hook 'c-mode-common-hook 'hs-minor-mode)
+  (global-set-key (kbd "<f10>")
+				  (lambda () (interactive) (hs-toggle-hiding)))
+  (global-set-key (kbd "<f11>")
+				  (lambda () (interactive) (hs-show-all))))
+(add-hook 'c++-mode-hook 'my:folding)
+(add-hook 'c-mode-hook 'my:folding)
+
+
+;;;;;;;;;;;;;
+;; purescript
+(defun my:purescript-hook ()
   (progn (turn-on-purescript-indent)
          (auto-comlete-mode t)))
-(add-hook 'purescript-mode-hook 'my-purescript-hook)
+(add-hook 'purescript-mode-hook 'my:purescript-hook)
 
 
-;; c/c++ breakpoints in code.
-(defun my:breakpoint ()
-  (interactive)
-  (insert "asm(\"int $3\");"))
-(global-set-key (kbd "C-c c b") 'my:breakpoint)
-
-
+;; Search
 ;; "C-o" to get all occurrences in file
 (define-key isearch-mode-map (kbd "C-o")
   (lambda ()
@@ -148,8 +173,55 @@
                (regexp-quote isearch-string))))))
 
 
-(defun my:insert-something ()
+;;;;;;;;;;;;;;;;
+;; my insertions
+
+;; c/c++ breakpoints in code.
+(defun my:breakpoint ()
   (interactive)
-  (insert "some text"))
-(global-unset-key (kbd "C-c c i"))
-(global-set-key (kbd "C-c c i") 'my:insert-something)
+  (insert "asm(\"int $3\");"))
+(global-set-key (kbd "C-c c b") 'my:breakpoint)
+
+(defun my:insert:smth ()
+  (interactive)
+  (insert "..."))
+(global-unset-key (kbd "C-c c i i "))
+(global-set-key (kbd "C-c c i i") 'my:insert:smth)
+
+(defun my:insert:coutn ()
+  (interactive)
+  (insert "std::cout << \"\\n\";")
+  (backward-char 4))
+(global-unset-key (kbd "C-c c i c n"))
+(global-set-key (kbd "C-c c i c n") 'my:insert:coutn)
+
+(defun my:insert:coutendl ()
+  (interactive)
+  (insert "std::cout <<  << \"\\n\";")
+  (backward-char 9))
+(global-unset-key (kbd "C-c c i c e"))
+(global-set-key (kbd "C-c c i c e") 'my:insert:coutendl)
+
+
+;;;;;;;;;;;;;;;;;;;
+;; my functionality
+(defun my:grep()
+  "Fast grep call with '-Rni' flags and quoted text"
+  (interactive)
+  (let* ((pattern (read-from-minibuffer "Search pattern: "))
+         (path (read-from-minibuffer "Path: "))
+         (command (format "grep -Rni \"%s\" %s" pattern path)))
+    (async-shell-command command)))
+(global-unset-key (kbd "<f6>"))
+(global-set-key (kbd "<f6>") 'my:grep)
+
+
+(defun my:grep-marked()
+  "Fast grep call with '-Rni' flags and quoted text"
+  (interactive)
+  (let* ((pattern (buffer-substring (mark) (point)))
+         (path (read-from-minibuffer "Path: "))
+         (command (format "grep -Rni \"%s\" %s" pattern path)))
+    (async-shell-command command)))
+(global-unset-key (kbd "<f7>"))
+(global-set-key (kbd "<f7>") 'my:grep-marked)
