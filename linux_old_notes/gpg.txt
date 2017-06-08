@@ -1,0 +1,6 @@
+tar -cz your_dir | gpg -c -o your_archive.tgz.gpg
+gpg -d your_archive.tgz.gpg | tar xz
+
+tar -c your_dir | gpg -c -o your_archive.tar.gpg
+gpg -d your_archive.tar.gpg | tar x
+

@@ -1,0 +1,5 @@
+# don't rename windows automatically
+`set-option -g allow-rename off`
+
+C-b : "resize-pane -D 10"
+

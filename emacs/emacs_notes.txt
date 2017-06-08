@@ -18,3 +18,8 @@ ctrl-x + ctrl-u   uppercase
 
 C-q insert the next character as a raw character
 C-q <press tab>
+
+
+`M-x describe-bindings`
+`M-x describe-key` after enter key sequence
+`M-x apropos` after enter regexp of desirable command description

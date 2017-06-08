@@ -39,13 +39,45 @@ docker run -i -t ubuntu /bin/bash
 --rm - 'Destroy a container once its exits'
 --name
 
-# dns in virtual machine
-sudo docker run -t -i --rm --dns 10.0.2.3 ubuntu /bin/bash
-dockerd ... --dns 10.0.2.3 ...
 
+# clear logs
+truncate -s 0 $(docker inspect -f '{{.LogPath}}' <container>)
+
+
+# ls only volume id`s
+docker volume ls | sed 's/\s\+/,/' | cut -d, -f2 | sed 1d
+
+
+# named volumes
+`docker volume create --name cache_volume`
+`... -v cache_volume:/var/cache`
+`docker volume inspect cache_volume`
+
+
+##########################
+# dns in virtual machine #
+
+sysctl -w net.ipv4.ip_forward=1  # (optional)
+nmcli dev show | grep DNS        # get dns (insert to '<>' below)
+nm-tool                          # (old)
+
+# this way:
 "/etc/default/docker"
-DOCKER_OPTS="-dns 10.0.2.3"
+DOCKER_OPTS="--dns <>"
 service docker restart
+# check for:
+  `/lib/systemd/system/docker.service`
+  `line "ExecStart=/usr/bin/dockerd" to have "$DOCKER_OPTS" in the end`
+
+
+# or that way:
+"/etc/docker/daemon.json"
+{"dns": ["<>", "8.8.8.8"] }
+
+docker run -ti --rm --dns <...> ubuntu /bin/bash
+###########################
+###########################
+
 
 # with gui
 docker run --rm -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix <container> <command>

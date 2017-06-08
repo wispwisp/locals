@@ -50,50 +50,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; file opening variants inline
-;;(require 'ido)
-;;(ido-mode t)
-;;(setq ido-enable-flex-matching t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
-;; +
-;; auto-complete for c/cpp (See include dirs: gcc -xc++ -E -v -)
-(defun my:ac-c-header-init()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories
-               '"/usr/lib/gcc/x86_64-pc-linux-gnu/4.9.3/include/g++-v4"))
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
-
-
-;; Semantic
-;;(require 'cedet)
-;;(semantic-mode 1)
-;;(defun my:add-semantic-to-autocomplete()
-;;  (add-to-list 'ac-sources 'ac-source-semantic))
-;;(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-
-
-;; turn on ede mode
-;;(global-ede-mode 1)
-;; create a project for our program.
-;;(ede-cpp-root-project "my project" :file "~/my_program/src/main.cpp"
-;;		      :include-path '("/../my_inc"))
-;; you can use system-include-path for setting up the system header file locations.
-;; turn on automatic reparsing of open buffers in semantic
-;;(global-semantic-idle-scheduler-mode 1)
-
-
-;;;;;;;;;;;;;;;;;;;;
-;; yasnipet
-;;(require 'yasnippet)
-;;(yas-global-mode 1)
 
 
 ;; jqery documantation
@@ -104,6 +64,7 @@
 
 ;;;;;;;;;;
 ;; My keys
+
 ;; (global-unset-key (kbd "<f12>"))
 ;; (global-set-key (kbd "<f12>") ')
 
@@ -112,11 +73,15 @@
 (global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
 
-;; regex search
 (global-set-key (kbd "M-s") 'search-forward-regexp)
 (global-set-key (kbd "M-r") 'search-backward-regexp)
 
 (global-set-key (kbd "C-M-y") 'revert-buffer)
+
+(global-set-key (kbd "ESC <left>")  'windmove-left)
+(global-set-key (kbd "ESC <right>") 'windmove-right)
+(global-set-key (kbd "ESC <up>")    'windmove-up)
+(global-set-key (kbd "ESC <down>")  'windmove-down)
 
 
 ;; highlight
@@ -140,19 +105,29 @@
 
 ;; show redundant trailing whitespaces
 (add-hook 'prog-mode-hook (lambda ()
-							(interactive)
-							(setq show-trailing-whitespace 1)))
+                            (interactive)
+                            (setq show-trailing-whitespace 1)))
 
 
 ;; folding
-(defun my:folding()
-  (add-hook 'c-mode-common-hook 'hs-minor-mode)
-  (global-set-key (kbd "<f10>")
-				  (lambda () (interactive) (hs-toggle-hiding)))
-  (global-set-key (kbd "<f11>")
-				  (lambda () (interactive) (hs-show-all))))
-(add-hook 'c++-mode-hook 'my:folding)
-(add-hook 'c-mode-hook 'my:folding)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode)
+              (hs-minor-mode 1)
+              (global-set-key (kbd "<f10>")
+                              (lambda () (interactive) (hs-toggle-hiding)))
+              (global-set-key (kbd "<f11>")
+                              (lambda () (interactive) (hs-show-all)))
+              )))
+
+
+;; tags
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
+              (ggtags-mode 1)
+              (global-set-key (kbd "<f12>") 'ggtags-find-reference))))
 
 
 ;;;;;;;;;;;;;
@@ -175,6 +150,11 @@
 
 ;;;;;;;;;;;;;;;;
 ;; my insertions
+
+;;;;;;;;;;;;;;;;;;;;
+;; yasnipet
+;;(require 'yasnippet)
+;;(yas-global-mode 1)
 
 ;; c/c++ breakpoints in code.
 (defun my:breakpoint ()
