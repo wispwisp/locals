@@ -3,3 +3,6 @@ grep -Ril "text-to-find-here" [dir_to_start]
 -R - recursive
 -l only file name
 
+# regex
+# -P perl
+grep -rnP -e'(false|true), (false|true)' ./*
