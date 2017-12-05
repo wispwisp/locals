@@ -1,0 +1,7 @@
+clang $(< flags)
+
+scan-build cmake ../
+scan-build make -j8
+scan-view /tmp/… # Смотрим последнюю строчку сборки
+cd /usr/share
+ln -s /usr/sh

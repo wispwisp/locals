@@ -117,7 +117,7 @@
               (global-set-key (kbd "<f10>")
                               (lambda () (interactive) (hs-toggle-hiding)))
               (global-set-key (kbd "<f11>")
-                              (lambda () (interactive) (hs-show-all)))
+                              (lambda () (interactive) (hs-hide-level 0)))
               )))
 
 

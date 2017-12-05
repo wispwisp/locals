@@ -1,0 +1,4 @@
+import re
+m = re.search(regexp, string)
+m.group(0) # whole match
+m.group(1) # next paranthesis
