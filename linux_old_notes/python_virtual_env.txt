@@ -1,0 +1,11 @@
+pip install virtualenv
+
+mkdir ~/python_virtual_environments && cd python_virtual_environments
+python3 -m venv <env-name>
+
+source ~/python_virtual_environments/<env-name>/bin/activate
+(env)$ deactivate
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
