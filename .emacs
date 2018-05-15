@@ -127,6 +127,7 @@
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
               (ggtags-mode 1)
+              (global-set-key (kbd "M-,") 'pop-tag-mark)
               (global-set-key (kbd "<f12>") 'ggtags-find-reference))))
 
 

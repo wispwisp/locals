@@ -90,7 +90,10 @@ git reset --hard origin/<BRANCH_NAME>
 git config --global core.editor emacs
 git config --global alias.co checkout
 git config --global pull.rebase true
-core.autocrlf
+                    core.autocrlf
+git config --local user.email "you@example.com"
+git config --local user.name "Your Name"
+
 
 // Edit created commit
 --amend

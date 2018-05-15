@@ -1,0 +1,3 @@
+a file without comments
+cat <file> | egrep -v "(^#.*|^$)"
+

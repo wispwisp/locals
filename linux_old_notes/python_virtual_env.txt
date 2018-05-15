@@ -1,7 +1,14 @@
-pip install virtualenv
+`pip install virtualenv`
+or
+`apt install virtualenv`
 
-mkdir ~/python_virtual_environments && cd python_virtual_environments
-python3 -m venv <env-name>
+`mkdir ~/python_virtual_environments && cd python_virtual_environments`
+`python3 -m venv <env-name>`
+
+or
+`virtualenv <env-name>`
+Creating an environment with a custom Python interpreter:
+`virtualenv --python=/usr/bin/python3.5 my_app`
 
 source ~/python_virtual_environments/<env-name>/bin/activate
 (env)$ deactivate
