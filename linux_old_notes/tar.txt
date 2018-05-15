@@ -1,3 +1,31 @@
+# archive ((c)reate, (f)ile name)
 tar cf name.tar files/
-
 tar xf name.tar
+
+# z - gzip v - (v)erbose
+tar cfzv name.tar.gz files/
+tar cfzv name.tgz files/
+
+# j - bz2, takes more time to compress
+tar cfj files.tar.bz2 files/
+tar cfj files.tar.tbz files/
+tar cfj files.tar.tb2 files/
+
+# -C (specified directory).
+tar xfv files.tar.bz2 -C /tmp/some_dir
+
+# t - list the content
+tar tvf
+
+# extarct single file
+tar xf files.tar file1.txt file2.txt file3.txt
+                 --wildcards '*.cpp'
+tar (z-or-j)xf files.(bz2/tgz) file.txt
+
+# r - append to archive
+tar rf archive.tar file.txt
+
+# split
+split -b 10M home.tar.bz2 "home.tar.bz2.part"
+cat home.tar.bz2.part* > home.tar.gz.joined
+
