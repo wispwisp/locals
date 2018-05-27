@@ -180,3 +180,9 @@ exmple:
 git branch -m old_branch new_branch
 git push origin :old_branch
 git push --set-upstream origin new_branch
+
+
+// cherry-pick
+// save hash from any commit of any branch, and on your branch:
+git cherry-pick <comit hash>
+

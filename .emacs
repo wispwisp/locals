@@ -169,6 +169,13 @@
 (global-unset-key (kbd "C-c c i i "))
 (global-set-key (kbd "C-c c i i") 'my:insert:smth)
 
+(defun my:insert:for ()
+  (interactive)
+  (insert "for (std::size_t i=0; i<; i++) {\n;\n}")
+  (backward-char 12))
+(global-unset-key (kbd "C-c c i f i"))
+(global-set-key (kbd "C-c c i f i") 'my:insert:for)
+
 (defun my:insert:coutn ()
   (interactive)
   (insert "std::cout << \"\\n\";")

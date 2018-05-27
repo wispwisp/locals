@@ -1,3 +1,4 @@
 a file without comments
 cat <file> | egrep -v "(^#.*|^$)"
+cat <file> | egrep -v "^\s*(#|$)"
 
