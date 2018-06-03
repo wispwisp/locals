@@ -1,0 +1,4 @@
+# copy dirs with exlcude
+rsync -av --progress <source folder> ~/<destination> --exclude <folder to exclude>
+-n - dry run
+
