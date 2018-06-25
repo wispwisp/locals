@@ -1,5 +1,9 @@
 FROM python:3.6.3-jessie
 
+# pandoc, texlive-xetex, nbconvert - save to pdf
+# https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex.
+RUN apt update && apt install -y pandoc texlive-xetex
+
 # talib
 # https://github.com/mrjbq7/ta-lib
 RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
@@ -10,7 +14,7 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
 RUN pip install --upgrade pip
 RUN pip install jupyter numpy scipy pandas matplotlib seaborn sklearn \
     statsmodels imbalanced-learn xgboost py-postgresql psycopg2 \
-    pandoc tensorflow keras
+    tensorflow keras nbconvert
 
 # after installation pf numpy
 RUN pip install TA-Lib

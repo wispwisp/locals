@@ -1,0 +1,8 @@
+# copy from csv
+## first connect as a client
+`docker run -it -v $(pwd -P):/home --rm --link containername:postgres postgres:10 psql -h postgres -U postgres`
+## copy from file
+`\copy deals FROM '/home/deals.csv' WITH (FORMAT csv, DELIMITER ';');`
+## save to file
+`\Copy (Select * From deals where security = '') To '/home/f.csv' With CSV DELIMITER ';';`
+
