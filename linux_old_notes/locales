@@ -1,0 +1,16 @@
+* `sudo dpkg-reconfigure locales`
+* `sudo locale-gen`
+
+
+* Stop accepting locale on the server.
+  Do not accept the locale environment variable from your local machine to the server.
+  You can comment out the `AcceptEnv LANG LC_*` line in the remote `/etc/ssh/sshd_config` file.
+
+
+* (optional) Explicitly set the locale. add the following
+  lines to your remote ~/.bashrc or ~/.profile files:
+```
+export LANGUAGE="en"
+export LANG="C"
+export LC_MESSAGES="C"
+```
