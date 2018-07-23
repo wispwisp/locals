@@ -1,0 +1,39 @@
+# install rfkill
+`rfkill list`
+`rfkill unblock <wifi>`
+
+# (optional)
+`sudo systemctl stop NetworkManager`
+`sudo systemctl disable NetworkManager`
+
+# find interface
+`iwconfig`
+`ifconfig <wlp3s0> up`
+
+# find access point
+`sudo iwlist <wlp3s0> scan | grep <ESSID>`
+
+# install wpasupplicant
+
+# create a file named `wpa_supplicant.conf` using the `wpa_passphrase`
+# The output will be piped to tee which then write to `/etc/wpa_supplicant.conf` file
+`wpa_passphrase <your-ESSID> <your-passphrase> | sudo tee /etc/wpa_supplicant.conf`
+`sudo tee -a` - append
+
+# Now use the following command to connect your wireless card to wireless access point.
+`sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i <wlp3s0>`
+
+# You can see that the wireless interface is now associated with an access point.
+`iwconfig`
+
+# can press CTRL+C to stop the current wpa_supplicant process
+# and run it in the background by adding -B option.
+`sudo wpa_supplicant -B -c /etc/wpa_supplicant.conf -i wlp3s0`
+
+# To obtain a private IP address from DHCP server, use the following command
+`sudo dhclient wlp3s0`
+`ifconfig <wlp3s0>`
+
+## To release the private IP address, run
+`sudo dhclient wlp3s0 -r`
+

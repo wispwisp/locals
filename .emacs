@@ -176,6 +176,13 @@
 (global-unset-key (kbd "C-c c i f i"))
 (global-set-key (kbd "C-c c i f i") 'my:insert:for)
 
+(defun my:insert:foreach ()
+  (interactive)
+  (insert "std::for_each(std::begin(), std::end(), [](){});\n")
+  (backward-char 24))
+(global-unset-key (kbd "C-c c i f e"))
+(global-set-key (kbd "C-c c i f e") 'my:insert:foreach)
+
 (defun my:insert:coutn ()
   (interactive)
   (insert "std::cout << \"\\n\";")
