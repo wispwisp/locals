@@ -11,7 +11,7 @@ echo " developement copied."
 
 
 echo -n "copy jupyter notebooks..."
-rsync -aq --progress ~/locals/install/jupyter/volume/notebooks/ notebooks_$TODAY --exclude orderlog
+rsync -aq --progress ~/locals/install/jupyter/volume/notebooks/ notebooks_$TODAY --exclude orderlog --exclude external
 echo " jupyter notebooks copied."
 
 
