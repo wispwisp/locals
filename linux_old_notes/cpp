@@ -1,8 +1,0 @@
-```#include <iomanip>
-std::cout << std::fixed << std::setprecision(2) << values[i] << " ";```
-
-```t1 = std::chrono::steady_clock::now();
-
-using time = std::chrono::milliseconds;
-m = std::chrono::duration_cast<time>( std::chrono::steady_clock::now() - t1 );
-print(m.count());```
