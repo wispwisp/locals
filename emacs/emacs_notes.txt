@@ -23,3 +23,28 @@ C-q <press tab>
 `M-x describe-bindings`
 `M-x describe-key` after enter key sequence
 `M-x apropos` after enter regexp of desirable command description
+
+
+;; *****************************************************************************
+
+
+# Find / Replace
+* Alt+x query-replace
+
+
+# How to add a prefix to every line?
+* `Alt+x string-rectangle`
+* `Ctrl+x r t`
+
+
+# How to insert unprintable characters into minibuffers
+* `Ctrl + q` + symbol, TAB for example, or Enter for newline
+
+
+# Unicode
+* `Ctrl+x 8 Enter` <type unicode code ex:2192>
+
+
+# Align text by symbol
+* `align-regexp`, then give symbol of align, '=' for example
+
