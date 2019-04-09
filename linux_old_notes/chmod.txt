@@ -1,7 +1,22 @@
-/////chmode /////
-//// chmode [code] filename
+# chmode
+`chmode [code] filename`
+
+```
 --x  -w-  -wr  r--  r-x  rw-  rwx  
  1    2    3    4    5    6    7
+```
+
+
+# recursively
+
+## file
+`chmod 644 $(find /path/to/base/dir -type f)`
+
+## directory
+`chmod 755 $(find /path/to/base/dir -type d)`
+
+
+# ***
 
 
 ///// chgrp /////
