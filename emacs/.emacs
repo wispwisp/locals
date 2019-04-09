@@ -56,12 +56,6 @@
 (ac-config-default)
 
 
-;; jqery documantation
-;; press "alt-x jqery-doc" after function
-(require 'jquery-doc)
-(add-hook 'js2-mode-hook 'jquery-doc-setup)
-
-
 ;;;;;;;;;;
 ;; My keys
 
@@ -82,6 +76,11 @@
 (global-set-key (kbd "ESC <right>") 'windmove-right)
 (global-set-key (kbd "ESC <up>")    'windmove-up)
 (global-set-key (kbd "ESC <down>")  'windmove-down)
+
+(global-set-key (kbd "M-<left>")  'windmove-left)
+(global-set-key (kbd "M-<right>") 'windmove-right)
+(global-set-key (kbd "M-<up>")    'windmove-up)
+(global-set-key (kbd "M-<down>")  'windmove-down)
 
 
 ;; highlight
@@ -116,7 +115,7 @@
               (hs-minor-mode 1)
               (global-set-key (kbd "<f10>")
                               (lambda () (interactive) (hs-toggle-hiding)))
-              (global-set-key (kbd "<f11>")
+              (global-set-key (kbd "<f9>")
                               (lambda () (interactive) (hs-hide-level 0)))
               )))
 
@@ -129,14 +128,6 @@
               (ggtags-mode 1)
               (global-set-key (kbd "M-,") 'pop-tag-mark)
               (global-set-key (kbd "<f12>") 'ggtags-find-reference))))
-
-
-;;;;;;;;;;;;;
-;; purescript
-(defun my:purescript-hook ()
-  (progn (turn-on-purescript-indent)
-         (auto-comlete-mode t)))
-(add-hook 'purescript-mode-hook 'my:purescript-hook)
 
 
 ;; Search
@@ -152,16 +143,10 @@
 ;;;;;;;;;;;;;;;;
 ;; my insertions
 
-;;;;;;;;;;;;;;;;;;;;
-;; yasnipet
-;;(require 'yasnippet)
-;;(yas-global-mode 1)
-
-;; c/c++ breakpoints in code.
-(defun my:breakpoint ()
+(defun my:breakpoint () ;; c/c++ breakpoints in code.
   (interactive)
   (insert "asm(\"int $3\");"))
-(global-set-key (kbd "C-c c b") 'my:breakpoint)
+(global-set-key (kbd "C-c c i b") 'my:breakpoint)
 
 (defun my:insert:smth ()
   (interactive)

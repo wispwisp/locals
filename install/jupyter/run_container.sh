@@ -3,7 +3,7 @@
 docker run \
     --name=jupyter \
     -d \
-    -v $(pwd -P)/volume:/home/jupyter/from_host \
+    -v /home/$(whoami)/data/jupyter_data:/home/jupyter/from_host \
     --network="host" \
     my/jupyter
 
