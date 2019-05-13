@@ -177,8 +177,8 @@
 
 (defun my:insert:coutendl ()
   (interactive)
-  (insert "std::cout <<  << \"\\n\";")
-  (backward-char 9))
+  (insert "std::cout <<  << std::endl;")
+  (backward-char 14))
 (global-unset-key (kbd "C-c c i c e"))
 (global-set-key (kbd "C-c c i c e") 'my:insert:coutendl)
 
