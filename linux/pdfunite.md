@@ -1,0 +1,1 @@
+`pdfunite ./*.pdf out.pdf`

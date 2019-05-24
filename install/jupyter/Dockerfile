@@ -11,7 +11,7 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
 
 RUN python3 -m pip install --upgrade pip && pip3 install \
     pandas psycopg2-binary sklearn jupyter numpy scipy matplotlib seaborn \
-    statsmodels imbalanced-learn xgboost tensorflow keras pykalman
+    statsmodels imbalanced-learn xgboost tensorflow keras pykalman lxml
 
 # after installation pf numpy
 RUN pip3 install TA-Lib
