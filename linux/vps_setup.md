@@ -30,7 +30,7 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)
 #### checks
 * `netstat -atu`
 * `lsof -i`
-* `nmap -sT -O localhost`
+* `nmap -sT -O -p- localhost`
 
 
 ## Set up login by SSH keys
