@@ -92,32 +92,39 @@ uncoment: `net.ipv4.ip_forward=1`
 * `sudo systemctl start openvpn@server`
 * `sudo systemctl is-active openvpn@server`
 
+# Create a new client
+If it is not a first client - replace `<client>` to name u want, and skip `mkdir clients`
+
+
 ## For each client we want to use, we must generate a certificate/key pair
-* `source vars && ./build-key client`
+* `source vars && ./build-key <client>`
+
 
 ## generate ovpn
 Now we have two options: we can either copy the necessary
 files to our client, or we can generate an .ovpn file,
 in which the content of those files are embed.
 We will concentrate on the second option. 
-`mkdir clients && cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf clients/client.ovpn`
+* `mkdir clients` - skip if it is not a first user
+* `cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf clients/<client>.ovpn`
+* `nano clients/<client>.ovpn`
 
-## clients/client.ovpn changes:
+
+## clients/<client>.ovpn changes:
 `remote my-server-1 1194` -> `remote <ip.ip.ip.ip> <port>`
 
 #### uncoment:
 ```
-# Downgrade privileges after initialization (non-Windows only)
 user nobody
 group nogroup
 ```
 
-#### First comment references (lines 88-90 and 108)
+#### First comment references
 ```
-#ca ca.crt
-#cert client.crt
-#key client.key
-#tls-auth ta.key 1
+# ca ca.crt
+# cert <client>.crt
+# key <client>.key
+# tls-auth ta.key 1
 ```
 
 #### Next, copy the content of the mentioned files, between the appropriate tags.
@@ -141,23 +148,4 @@ key-direction 1
 <tls-auth>
 # The content of the ta.key file
 </tls-auth>
-```
-
-
-
-
-# * * *
-# Create a new client ("Android")
-* `cd certificates`
-* `source vars && ./build-key android`
-* `cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf clients/android.ovpn`
-* `nano clients/android.ovpn` - Change fileds, see above
-```
-<cert>
-from android.crt
-</cert>
-
-<key>
-from android.key
-</key>
 ```
