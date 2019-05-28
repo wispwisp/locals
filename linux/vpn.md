@@ -101,10 +101,7 @@ If it is not a first client - replace `<client>` to name u want, and skip `mkdir
 
 
 ## generate ovpn
-Now we have two options: we can either copy the necessary
-files to our client, or we can generate an .ovpn file,
-in which the content of those files are embed.
-We will concentrate on the second option. 
+Create an `.ovpn` file, in which the content of necessary files are embedded.
 * `mkdir clients` - skip if it is not a first user
 * `cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf clients/<client>.ovpn`
 * `nano clients/<client>.ovpn`
