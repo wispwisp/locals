@@ -2,7 +2,7 @@
 
 docker run \
     --name=jupyter \
-    -d \
+    -d --restart always \
     -v /home/$(whoami)/data/jupyter_data:/home/jupyter/from_host \
     --network="host" \
     my/jupyter
