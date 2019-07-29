@@ -2,6 +2,23 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+;; required packages
+(setq package-list '(auto-complete
+                     highlight-symbol
+                     ggtags
+                     markdown-mode
+                     clang-format
+                     dockerfile-mode))
+
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
 
 ;; No startup screen
 (setq inhibit-startup-screen t)
