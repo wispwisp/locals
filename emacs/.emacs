@@ -79,10 +79,12 @@
 ;; (global-unset-key (kbd "<f12>"))
 ;; (global-set-key (kbd "<f12>") ')
 
-(global-set-key (kbd "C-c c k") 'comment-region)
-(global-set-key (kbd "C-c c u") 'uncomment-region)
+(global-set-key (kbd "C-c c d d") 'delete-trailing-whitespace)
 (global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
 (global-set-key (kbd "C-c c TAB") 'clang-format-region)
+
+(global-set-key (kbd "C-c c k") 'comment-region)
+(global-set-key (kbd "C-c c u") 'uncomment-region)
 
 (global-set-key (kbd "M-s") 'search-forward-regexp)
 (global-set-key (kbd "M-r") 'search-backward-regexp)
@@ -107,6 +109,8 @@
 (global-set-key (kbd "C-c c s l") 'highlight-symbol-occur)
 (global-set-key (kbd "C-c c s n") 'highlight-symbol-next)
 (global-set-key (kbd "C-c c s p") 'highlight-symbol-prev)
+(global-set-key (kbd "C-c c s q") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-c c s w") 'unhighlight-regexp)
 (setq highlight-symbol-idle-delay 0.5)
 
 
@@ -126,15 +130,17 @@
 
 
 ;; folding
+(defun hs-my-hiding-keys ()
+  (hs-minor-mode 1)
+  (global-set-key (kbd "<f10>")
+                  (lambda () (interactive) (hs-toggle-hiding)))
+  (global-set-key (kbd "<f9>")
+                  (lambda () (interactive) (hs-hide-level 0))))
+
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode)
-              (hs-minor-mode 1)
-              (global-set-key (kbd "<f10>")
-                              (lambda () (interactive) (hs-toggle-hiding)))
-              (global-set-key (kbd "<f9>")
-                              (lambda () (interactive) (hs-hide-level 0)))
-              )))
+            (when (derived-mode-p 'c-mode 'c++-mode) (hs-my-hiding-keys))))
+(add-hook 'python-mode-hook 'hs-my-hiding-keys)
 
 
 ;; tags
@@ -147,7 +153,7 @@
               (global-set-key (kbd "<f12>") 'ggtags-find-reference))))
 
 
-;; Search
+;; Search (When in isearch)
 ;; "C-o" to get all occurrences in file
 (define-key isearch-mode-map (kbd "C-o")
   (lambda ()
@@ -155,6 +161,13 @@
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string
                (regexp-quote isearch-string))))))
+
+
+;; calendar
+(add-hook 'calendar-load-hook
+          (lambda ()
+            ;; (calendar-set-date-style 'iso)
+            (setq calendar-week-start-day 1)))
 
 
 ;;;;;;;;;;;;;;;;
