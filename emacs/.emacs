@@ -59,6 +59,13 @@
 (setq column-number-mode  t)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keep a list of recently opened files
+(require 'recentf)
+(recentf-mode 1)
+(global-set-key (kbd "C-c c f r") 'recentf-open-files)
+
+
 ;;;;;;;;;;;;;;;
 ;; line numbers
 (require 'linum)
@@ -71,6 +78,11 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
+
+
+;;;;;;;;;;;;;;;;
+;; flyspell mode
+(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
 
 
 ;;;;;;;;;;
