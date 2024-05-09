@@ -2,17 +2,21 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+
 ;; required packages
 (setq package-list '(auto-complete
                      highlight-symbol
-                     ggtags
+                     clojure-mode
+                     cider
+                     paredit
                      markdown-mode
-                     clang-format
                      dockerfile-mode))
+
 
 ;; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
+
 
 ;; install the missing packages
 (dolist (package package-list)
@@ -80,9 +84,27 @@
 (ac-config-default)
 
 
-;;;;;;;;;;;;;;;;
-;; flyspell mode
-(add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; paredit
+(require 'paredit)
+(eval-after-load "paredit"
+  '(progn
+     (define-key paredit-mode-map (kbd "M-q") nil)
+     (define-key paredit-mode-map (kbd "ESC <left>") nil)
+     (define-key paredit-mode-map (kbd "ESC <right>") nil)
+     (define-key paredit-mode-map (kbd "ESC <up>") nil)
+     (define-key paredit-mode-map (kbd "ESC <down>") nil)
+     (define-key paredit-mode-map (kbd "M-<left>") nil)
+     (define-key paredit-mode-map (kbd "M-<right>") nil)
+     (define-key paredit-mode-map (kbd "M-<up>") nil)
+     (define-key paredit-mode-map (kbd "M-<down>") nil)))
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; cider-jack-in-cljs repl
+;; connect timeout increase.
+(setq nrepl-sync-request-timeout 60)
 
 
 ;;;;;;;;;;
@@ -91,9 +113,13 @@
 ;; (global-unset-key (kbd "<f12>"))
 ;; (global-set-key (kbd "<f12>") ')
 
+(global-set-key (kbd "C-c c DEL")
+                'paredit-splice-sexp-killing-backward)
+(global-set-key (kbd "C-c c <deletechar>")
+                'paredit-splice-sexp-killing-forward)
+
 (global-set-key (kbd "C-c c d d") 'delete-trailing-whitespace)
-(global-set-key (kbd "C-c c <down>") 'scroll-all-mode)
-(global-set-key (kbd "C-c c TAB") 'clang-format-region)
+(global-set-key (kbd "C-c c TAB") 'cider-format-buffer)
 
 (global-set-key (kbd "C-c c k") 'comment-region)
 (global-set-key (kbd "C-c c u") 'uncomment-region)
@@ -102,6 +128,8 @@
 (global-set-key (kbd "M-r") 'search-backward-regexp)
 
 (global-set-key (kbd "C-M-y") 'revert-buffer)
+
+(global-set-key (kbd "M-q") 'xterm-mouse-mode)
 
 (global-set-key (kbd "ESC <left>")  'windmove-left)
 (global-set-key (kbd "ESC <right>") 'windmove-right)
@@ -132,7 +160,7 @@
 
 ;; todo: new line and clang-format
 ;; automatically indent when press RET
-;; (global-set-key (kbd "RET") 'newline-and-indent)
+;; (global-set-key (kbd "RET") 'cider-format-buffer)
 
 
 ;; show redundant trailing whitespaces
@@ -153,17 +181,7 @@
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode) (hs-my-hiding-keys))))
 (add-hook 'python-mode-hook 'hs-my-hiding-keys)
-
-
-;; tags
-(require 'ggtags)
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
-              (ggtags-mode 1)
-              (global-set-key (kbd "M-,") 'pop-tag-mark)
-              (global-set-key (kbd "<f12>") 'ggtags-find-reference))))
-
+(add-hook 'clojure-mode-hook 'hs-my-hiding-keys)
 
 ;; Search (When in isearch)
 ;; "C-o" to get all occurrences in file
@@ -247,3 +265,4 @@
     (async-shell-command command)))
 (global-unset-key (kbd "<f7>"))
 (global-set-key (kbd "<f7>") 'my:grep-marked)
+
